@@ -1,0 +1,49 @@
+/* Adjust the floating table of contents to stay within the screen bounds */
+#toc {
+  position: fixed !important;  /* Keep TOC fixed */
+  top: 50px;                  /* Offset from top */
+  left: 0;
+  right: 0;
+  z-index: 1000;              /* Ensure TOC is on top */
+  max-height: 100vh;          /* Limit the height of TOC */
+  overflow-y: auto;           /* Allow scrolling in the TOC */
+  width: 250px;               /* Set the width of the TOC */
+}
+
+/* Dynamically adjust the left margin for the content based on TOC visibility */
+body {
+  margin-left: 0;             /* No left margin by default */
+}
+
+/* Adjust margin when the TOC is visible */
+body.sidebar-visible {
+  margin-left: 250px;         /* Add space for the floating TOC */
+}
+
+/* Make large tables scrollable horizontally */
+table {
+  width: 100%;
+  table-layout: auto;
+  overflow-x: auto;
+  display: block;
+}
+
+/* Adjust the TOC styling to be more compact */
+#toc ul {
+  list-style: none;
+  padding: 0;
+}
+
+#toc a {
+  font-size: 14px;
+}
+
+/* Optional: Ensure the TOC is not too large on small screens */
+@media (max-width: 768px) {
+  #toc {
+    width: 200px; /* Reduce width of TOC on small screens */
+  }
+  body.sidebar-visible {
+    margin-left: 200px;
+  }
+}
