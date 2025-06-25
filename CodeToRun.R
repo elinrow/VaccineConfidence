@@ -19,7 +19,7 @@ library(htmlTable)
 library(arsenal)
 
 
-cli::cli_alert_info("- Cleaning Data")
+cli::cli_alert("- Cleaning Data")
 source("Analysis/1. Data Cleaning.R")
 
 cli::cli_alert_info(" - Creating functions")
@@ -35,5 +35,5 @@ source("Analysis/Summary Tables.R")
 source("Analysis/Pooled Results.R")
 source("Analysis/CountryLevelResults.R")
 source("Analysis/TimeSeries.R")
-source("Analysis/Correlation Heatmaps - Confidence")
+source("Analysis/Correlation Heatmaps - Confidence.R")
 
