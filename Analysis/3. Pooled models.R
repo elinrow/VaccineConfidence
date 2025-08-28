@@ -10,27 +10,31 @@ pooled_models <- function(data, threshold) {
   
   data <- data %>%
     mutate(VaxImpChild = case_when(
-      VaxImpChild == "Somewhat Agree" ~ "somewhat agree/disagree",
-      VaxImpChild == "Somewhat Disagree" ~ "somewhat agree/disagree",
+      VaxImpChild == "Somewhat Agree" ~ "somewhat agree/disagree/dnk",
+      VaxImpChild == "Somewhat Disagree" ~ "somewhat agree/disagree/dnk",
+      VaxImpChild == "Do not know" ~ "somewhat agree/disagree/dnk",
       TRUE ~ VaxImpChild  # Retains other values as they are
     ))
   
   data <- data %>%
     mutate(VaxSaf = case_when(
-      VaxSaf =="Somewhat Agree" ~ "somewhat agree/disagree",
-      VaxSaf == "Somewhat Disagree" ~ "somewhat agree/disagree",
+      VaxSaf =="Somewhat Agree" ~ "somewhat agree/disagree/dnk",
+      VaxSaf == "Somewhat Disagree" ~ "somewhat agree/disagree/dnk",
+      VaxSaf == "Do not know" ~ "somewhat agree/disagree/dnk",
       TRUE ~ VaxSaf))
   
   data <- data %>%
     mutate(VaxEff = case_when(
-      VaxEff == "Somewhat Agree" ~ "somewhat agree/disagree",
-      VaxEff == "Somewhat Disagree" ~ "somewhat agree/disagree",
+      VaxEff == "Somewhat Agree" ~ "somewhat agree/disagree/dnk",
+      VaxEff == "Somewhat Disagree" ~ "somewhat agree/disagree/dnk",
+      VaxEff == "Do not know" ~ "somewhat agree/disagree/dnk",
       TRUE ~ VaxEff))
   
   data <- data %>%
     mutate(VaxRel = case_when(
-      VaxRel == "Somewhat Agree" ~ "somewhat agree/disagree",
-      VaxRel == "Somewhat Disagree" ~ "somewhat agree/disagree",
+      VaxRel == "Somewhat Agree" ~ "somewhat agree/disagree/dnk",
+      VaxRel == "Somewhat Disagree" ~ "somewhat agree/disagree/dnk",
+      VaxRel == "Do not know" ~ "somewhat agree/disagree/dnk/dnk",
       TRUE ~ VaxRel))
   
   data$VaxImpChild <- as.factor(data$VaxImpChild)
@@ -63,10 +67,10 @@ pooled_models <- function(data, threshold) {
   data <- within(data, Religion <- relevel(Religion, "Atheist/Agnostic/No Religion"))
   data <- within(data, Year <- relevel(Year, "2015"))
   data <- within(data, Education <- relevel(Education, "Primary or below"))
-  data <- within(data, VaxImpChild <- relevel(VaxImpChild, "somewhat agree/disagree"))
-  data <- within(data, VaxSaf <- relevel(VaxSaf,"somewhat agree/disagree"))
-  data <- within(data, VaxEff<- relevel(VaxEff, "somewhat agree/disagree"))
-  data <- within(data, VaxRel <- relevel(VaxRel,"somewhat agree/disagree"))  
+  data <- within(data, VaxImpChild <- relevel(VaxImpChild, "somewhat agree/disagree/dnk"))
+  data <- within(data, VaxSaf <- relevel(VaxSaf,"somewhat agree/disagree/dnk"))
+  data <- within(data, VaxEff<- relevel(VaxEff, "somewhat agree/disagree/dnk"))
+  data <- within(data, VaxRel <- relevel(VaxRel,"somewhat agree/disagree/dnk"))  
   
   # Next, turn the data into a dataframe.
   

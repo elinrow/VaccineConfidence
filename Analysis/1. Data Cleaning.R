@@ -89,13 +89,15 @@ levels(data$Education)[levels(data$Education) %in% c("Other education level", "O
 levels(data$Education)[levels(data$Education) %in% c("Undergraduate Degree", "Postgraduate Degree", "University or above")] <- "University or Above"
 levels(data$Education)[levels(data$Education) %in% c("Primary School", "Primary or below", "No Education", "Primary school or lower")] <- "Primary or below"
 
-levels(data$Religion)
-
 levels(data$Religion)[levels(data$Religion) %in% c("Agnostic/Atheist", "Agnostic/Atheist/no religion", "Atheist/agnostic")] <- "Atheist/Agnostic/No Religion"
-levels(data$Religion)[levels(data$Religion) %in% c("Other", "Other religious affiliation")] <- "Other"
 levels(data$Religion)[levels(data$Religion) %in% c("No Answer", "No response", "Refused/DNK/DNA", "Refused/Don't know/no answer")] <- "No Answer"
+levels(data$Religion)[levels(data$Religion) %in% c("Other", "Other religious affiliation")] <- "Other"
 levels(data$Religion)[levels(data$Religion) %in% c("Russian or Eastern Orthodox", "Russian/Eastern-Orthodox")] <- "Russian / Eastern Orthodox"
 levels(data$Religion)[levels(data$Religion) %in% c("Christian", "Other Christian", "Protestant", "Roman Catholic", "Russian / Eastern Orthodox")] <- "Christian"
+
+data <- data |>
+  filter(Religion != "No Answer",
+         Education != "No Answer")
 
 ###
 
@@ -105,7 +107,8 @@ levels(data$VaxImpChild)[levels(data$VaxImpChild) == 1] <- "Strongly Agree"
 levels(data$VaxImpChild)[levels(data$VaxImpChild) == 2] <- "Somewhat Agree"
 levels(data$VaxImpChild)[levels(data$VaxImpChild) == 3] <- "Somewhat Disagree"
 levels(data$VaxImpChild)[levels(data$VaxImpChild) == 4] <- "Strongly Disagree"
-levels(data$VaxImpChild)[levels(data$VaxImpChild) %in% c(5,9,98,99)] <- "Missing"
+levels(data$VaxImpChild)[levels(data$VaxImpChild) == 5] <- "Do not know"
+levels(data$VaxImpChild)[levels(data$VaxImpChild) %in% c(9,98,99)] <- "Missing"
 
 data$VaxSaf <- as.factor(data$VaxSaf)
 
@@ -113,7 +116,8 @@ levels(data$VaxSaf)[levels(data$VaxSaf) == 1] <- "Strongly Agree"
 levels(data$VaxSaf)[levels(data$VaxSaf) == 2] <- "Somewhat Agree"
 levels(data$VaxSaf)[levels(data$VaxSaf) == 3] <- "Somewhat Disagree"
 levels(data$VaxSaf)[levels(data$VaxSaf) == 4] <- "Strongly Disagree"
-levels(data$VaxSaf)[levels(data$VaxSaf) %in% c(5,9,98,99)] <- "Missing"
+levels(data$VaxSaf)[levels(data$VaxSaf) == 5] <- "Do not know"
+levels(data$VaxSaf)[levels(data$VaxSaf) %in% c(9,98,99)] <- "Missing"
 
 data$VaxEff <- as.factor(data$VaxEff)
 
@@ -121,7 +125,8 @@ levels(data$VaxEff)[levels(data$VaxEff) == 1] <- "Strongly Agree"
 levels(data$VaxEff)[levels(data$VaxEff) == 2] <- "Somewhat Agree"
 levels(data$VaxEff)[levels(data$VaxEff) == 3] <- "Somewhat Disagree"
 levels(data$VaxEff)[levels(data$VaxEff) == 4] <- "Strongly Disagree"
-levels(data$VaxEff)[levels(data$VaxEff) %in% c(5,9,98,99)] <- "Missing"
+levels(data$VaxEff)[levels(data$VaxEff) == 5] <- "Do not know"
+levels(data$VaxEff)[levels(data$VaxEff) %in% c(9,98,99)] <- "Missing"
 
 data$VaxRel <- as.factor(data$VaxRel)
 
@@ -129,26 +134,24 @@ levels(data$VaxRel)[levels(data$VaxRel) == 1] <- "Strongly Agree"
 levels(data$VaxRel)[levels(data$VaxRel) == 2] <- "Somewhat Agree"
 levels(data$VaxRel)[levels(data$VaxRel) == 3] <- "Somewhat Disagree"
 levels(data$VaxRel)[levels(data$VaxRel) == 4] <- "Strongly Disagree"
-levels(data$VaxRel)[levels(data$VaxRel) %in% c(5,9,98,99)] <- "Missing"
+levels(data$VaxRel)[levels(data$VaxRel) == 5] <- "Do not know"
+levels(data$VaxRel)[levels(data$VaxRel) %in% c(9,98,99)] <- "Missing"
 
 data$Year <- as.factor(data$Year)
 
 # Missing values not explained - exclude
+
+data <- data %>%
+  filter(Country != "France")
 
 data <- data %>% filter(VaxImpChild != "Missing")
 data <- data %>% filter(VaxSaf != "Missing")
 data <- data %>% filter(VaxEff != "Missing")
 data <- data %>% filter(VaxRel != "Missing")
 
-data <- data %>% filter(Religion != "No Answer")
-data <- data %>% filter(Education != "No Answer")
-
 data <- subset(data, select = c(Country,Age,Gender,Religion,Education,Year,VaxImpChild, VaxSaf, VaxEff, VaxRel))
 
 summary(data$Country)
-
-data <- data %>%
-  filter(Country != "France")
 
 data <- data %>%
   mutate(id = row_number())

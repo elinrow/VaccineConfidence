@@ -3,8 +3,15 @@ model_plot <- function(dataset) {
   pooled_plot <- ggplot(dataset, aes(x = OR, y = var, colour = question, 
                                             shape = ifelse((LCI > 1 & UCI > 1) | (LCI < 1 & UCI < 1),
                                                            "Significant", "Not Significant"))) +
-    geom_pointrange(aes(xmin = LCI, xmax = UCI), position = position_dodge(width = 0.5)) +
-    facet_wrap(~answer, labeller = labeller(answer = c("strongly_agree" = "Strongly Agree", "strongly_disagree" = "Strongly Disagree"))) +  # Facet by 'answer'
+    geom_point(position = position_dodge(width = 0.8), size = 4)+
+    geom_errorbar(
+            aes(xmin = as.numeric(LCI), xmax = as.numeric(UCI)),
+            position = position_dodge(width = 0.8),
+            width = 0,
+            size = 0.75  # This controls the thickness of the error bar line
+          ) +
+    facet_wrap(~answer, labeller = labeller(answer = c("strongly_agree" = "Strongly Agree", "strongly_disagree" = "Strongly Disagree")),
+               scales = "free_x", ncol = 2) +  # Facet by 'answer'
     scale_color_manual(
       name = "Question",  # Change legend title
       values = c("importance" = "navy", "safety" = "darkred", "effectiveness" = "orange", "religious_beliefs" = "darkgreen"),  # Define colors
@@ -15,13 +22,20 @@ model_plot <- function(dataset) {
     theme_minimal() +
     labs(
       x = "Odds Ratio (OR)",
-      y = "Variables",
-      title = "Responses to Survey Questions on Vaccine Confidence") + 
+      y = "Variables") + 
     scale_shape_manual(
       name = "Significance",
-      values = c("Significant" = 17, "Not Significant" = 1)  # Choose your own shapes!
+      values = c("Significant" = 17, "Not Significant" = 1)
     ) + 
-    theme(legend.position = "right")
+    theme(legend.position = "bottom",
+          strip.text = element_text(face = "bold", size = 20),
+          axis.text = ggplot2::element_text(size = 16),
+          axis.title = ggplot2::element_text(size = 16),
+          legend.text = ggplot2::element_text(size = 14),
+          legend.title = ggplot2::element_text(size = 16)
+          ) +
+    ggplot2::guides(colour = ggplot2::guide_legend(ncol = 2),
+                    shape = ggplot2::guide_legend(ncol = 1))
   
   return(pooled_plot)
 }  
