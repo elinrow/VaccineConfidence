@@ -10,31 +10,31 @@ romania_models <- function(country_data,country_name) {
   
   country_data <- country_data %>%
     mutate(VaxImpChild = case_when(
-      VaxImpChild == "Somewhat Agree" ~ "somewhat agree/somewhat disagree/dnk",
-      VaxImpChild == "Somewhat Disagree" ~ "somewhat agree/somewhat disagree/dnk",
-      VaxImpChild == "Do not know" ~ "somewhat agree/somewhat disagree/dnk",
+      VaxImpChild == "Somewhat Agree" ~ "somewhat agree/disagree/dnk",
+      VaxImpChild == "Somewhat Disagree" ~ "somewhat agree/disagree/dnk",
+      VaxImpChild == "Do not know" ~ "somewhat agree/disagree/dnk",
       TRUE ~ VaxImpChild  # Retains other values as they are
     ))
   
   country_data <- country_data %>%
     mutate(VaxSaf = case_when(
-      VaxSaf =="Somewhat Agree" ~ "somewhat agree/somewhat disagree/dnk",
-      VaxSaf == "Somewhat Disagree" ~ "somewhat agree/somewhat disagree/dnk",
-      VaxSaf == "Do not know" ~ "somewhat agree/somewhat disagree/dnk",
+      VaxSaf =="Somewhat Agree" ~ "somewhat agree/disagree/dnk",
+      VaxSaf == "Somewhat Disagree" ~ "somewhat agree/disagree/dnk",
+      VaxSaf == "Do not know" ~ "somewhat agree/disagree/dnk",
       TRUE ~ VaxSaf))
   
   country_data <- country_data %>%
     mutate(VaxEff = case_when(
-      VaxEff == "Somewhat Agree" ~ "somewhat agree/somewhat disagree/dnk",
-      VaxEff == "Somewhat Disagree" ~ "somewhat agree/somewhat disagree/dnk",
-      VaxEff == "Do not know" ~ "somewhat agree/somewhat disagree/dnk",
+      VaxEff == "Somewhat Agree" ~ "somewhat agree/disagree/dnk",
+      VaxEff == "Somewhat Disagree" ~ "somewhat agree/disagree/dnk",
+      VaxEff == "Do not know" ~ "somewhat agree/disagree/dnk",
       TRUE ~ VaxEff))
   
   country_data <- country_data %>%
     mutate(VaxRel = case_when(
-      VaxRel == "Somewhat Agree" ~ "somewhat agree/somewhat disagree/dnk",
-      VaxRel == "Somewhat Disagree" ~ "somewhat agree/somewhat disagree/dnk",
-      VaxRel == "Do not know" ~ "somewhat agree/somewhat disagree/dnk",
+      VaxRel == "Somewhat Agree" ~ "somewhat agree/disagree/dnk",
+      VaxRel == "Somewhat Disagree" ~ "somewhat agree/disagree/dnk",
+      VaxRel == "Do not know" ~ "somewhat agree/disagree/dnk",
       TRUE ~ VaxRel))
   
   country_data$VaxImpChild <- as.factor(country_data$VaxImpChild)
@@ -53,10 +53,10 @@ romania_models <- function(country_data,country_name) {
   country_data <- within(country_data, Religion <- relevel(Religion, "Other"))
   country_data <- within(country_data, Year <- relevel(Year, "2015"))
   country_data <- within(country_data, Education <- relevel(Education, "Primary or below"))
-  country_data <- within(country_data, VaxImpChild <- relevel(VaxImpChild, "somewhat agree/somewhat disagree/dnk"))
-  country_data <- within(country_data, VaxSaf <- relevel(VaxSaf,"somewhat agree/somewhat disagree/dnk"))
-  country_data <- within(country_data, VaxEff<- relevel(VaxEff, "somewhat agree/somewhat disagree/dnk"))
-  country_data <- within(country_data, VaxRel <- relevel(VaxRel,"somewhat agree/somewhat disagree/dnk"))  
+  country_data <- within(country_data, VaxImpChild <- relevel(VaxImpChild, "somewhat agree/disagree/dnk"))
+  country_data <- within(country_data, VaxSaf <- relevel(VaxSaf,"somewhat agree/disagree/dnk"))
+  country_data <- within(country_data, VaxEff<- relevel(VaxEff, "somewhat agree/disagree/dnk"))
+  country_data <- within(country_data, VaxRel <- relevel(VaxRel,"somewhat agree/disagree/dnk"))  
   
   # Next, turn the data into a dataframe.
   

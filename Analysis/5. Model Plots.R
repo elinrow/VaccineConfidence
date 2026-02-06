@@ -10,8 +10,7 @@ model_plot <- function(dataset) {
             width = 0,
             size = 0.75  # This controls the thickness of the error bar line
           ) +
-    facet_wrap(~answer, labeller = labeller(answer = c("strongly_agree" = "Strongly Agree", "strongly_disagree" = "Strongly Disagree")),
-               scales = "free_x", ncol = 2) +  # Facet by 'answer'
+    facet_wrap(~answer, scales = "free_x", ncol = 2) +  # Facet by 'answer'
     scale_color_manual(
       name = "Question",  # Change legend title
       values = c("importance" = "navy", "safety" = "darkred", "effectiveness" = "orange", "religious_beliefs" = "darkgreen"),  # Define colors
@@ -28,11 +27,11 @@ model_plot <- function(dataset) {
       values = c("Significant" = 17, "Not Significant" = 1)
     ) + 
     theme(legend.position = "bottom",
-          strip.text = element_text(face = "bold", size = 20),
-          axis.text = ggplot2::element_text(size = 16),
-          axis.title = ggplot2::element_text(size = 16),
-          legend.text = ggplot2::element_text(size = 14),
-          legend.title = ggplot2::element_text(size = 16)
+          strip.text = ggplot2::element_blank(),
+          axis.text = ggplot2::element_text(size = 18),
+          axis.title = ggplot2::element_text(size = 18, face = "bold"),
+          legend.text = ggplot2::element_text(size = 18),
+          legend.title = ggplot2::element_blank()
           ) +
     ggplot2::guides(colour = ggplot2::guide_legend(ncol = 2),
                     shape = ggplot2::guide_legend(ncol = 1))

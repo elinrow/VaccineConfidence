@@ -34,7 +34,7 @@ pooled_models <- function(data, threshold) {
     mutate(VaxRel = case_when(
       VaxRel == "Somewhat Agree" ~ "somewhat agree/disagree/dnk",
       VaxRel == "Somewhat Disagree" ~ "somewhat agree/disagree/dnk",
-      VaxRel == "Do not know" ~ "somewhat agree/disagree/dnk/dnk",
+      VaxRel == "Do not know" ~ "somewhat agree/disagree/dnk",
       TRUE ~ VaxRel))
   
   data$VaxImpChild <- as.factor(data$VaxImpChild)

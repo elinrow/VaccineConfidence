@@ -8,7 +8,7 @@
 country_level_data <- function(dataset, country_name, threshold) {
   
   # This filters the dataset so that it only contains responses from the specified country.
-  country_data <- data %>% filter(Country == country_name)
+  country_data <- dataset |> dplyr::filter(Country == country_name)
   
   # Use the droplevels function to ensure that any levels not relevant to the specified
   # country are removed.

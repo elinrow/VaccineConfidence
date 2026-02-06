@@ -1,6 +1,6 @@
 data <- readRDS("Data/vcp-global-data.rds")
 
-options(scipen = n)
+options(scipen = 3)
 
 data$Country <- as.factor(data$Country)
 
@@ -159,3 +159,9 @@ data <- data %>%
 data <- droplevels(data)
 
 write.csv(data, "Results/cleanedData.csv")
+
+#### summaries
+
+
+
+

@@ -1,8 +1,8 @@
 countries <- c("Austria",  "Bulgaria", "Czechia",  "Finland", "Germany", "Ireland",  "Italy", "Poland", "Spain")
 
 for(i in countries){
-  df <- country_level_data(data,i, threshold = 100)
-  result <- c_models(df, i) %>%
+  df <- country_level_data(data, i, threshold = 100)
+  result <- c_models(df, i) |>
     mutate(country = i)
   assign(paste0(i, "_results"), result)
 }
@@ -14,4 +14,4 @@ Romania_results <- romania_models(Romania_data, "Romania") %>%
 country_level_results <- rbind(Austria_results, Bulgaria_results, Czechia_results, Finland_results, Germany_results,
       Ireland_results, Italy_results, Poland_results, Romania_results, Spain_results)
 
-write.csv(country_level_results, "Results/countryLevelResults.csv")  
+#write.csv(country_level_results, "countryLevelResults.csv")

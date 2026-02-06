@@ -3,6 +3,5 @@
 .RData
 .Ruserdata
 .Rprofile
-results/*csv
-results/*png
-
+results/
+results/app.R
