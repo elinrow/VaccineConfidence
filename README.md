@@ -1,5 +1,5 @@
 # Vaccine Confidence in Europe
-<img src="https://img.shields.io/badge/Study%20Status-Started-blue.svg" alt="Study Status: Started">
+<img src="https://img.shields.io/badge/Study%20Status-Started-blue.svg" alt="Study Status: In Progress">
 
 - **Study title**: Vaccine Confidence in Europe: Socio-Demographic Predictors and Impact on National Measles Immunisation Coverage 
 - **Authors**: Elin J Rowlands, Anna-Maria Hartner & Katy A. M. Gaythorpe
